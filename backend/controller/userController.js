@@ -103,80 +103,7 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return next(new ErrorHandler("Doctor Avatar Required!", 400));
-  }
-  const { docAvatar } = req.files;
-  const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
-  if (!allowedFormats.includes(docAvatar.mimetype)) {
-    return next(new ErrorHandler("File Format Not Supported!", 400));
-  }
-  const {
-    firstName,
-    lastName,
-    email,
-    phone,
-    nic,
-    dob,
-    gender,
-    password,
-    doctorDepartment,
-  } = req.body;
-  if (
-    !firstName ||
-    !lastName ||
-    !email ||
-    !phone ||
-    !nic ||
-    !dob ||
-    !gender ||
-    !password ||
-    !doctorDepartment ||
-    !docAvatar
-  ) {
-    return next(new ErrorHandler("Please Fill Full Form!", 400));
-  }
-  const isRegistered = await User.findOne({ email });
-  if (isRegistered) {
-    return next(
-      new ErrorHandler("Doctor With This Email Already Exists!", 400)
-    );
-  }
-  const cloudinaryResponse = await cloudinary.uploader.upload(
-    docAvatar.tempFilePath
-  );
-  if (!cloudinaryResponse || cloudinaryResponse.error) {
-    console.error(
-      "Cloudinary Error:",
-      cloudinaryResponse.error || "Unknown Cloudinary error"
-    );
-    return next(
-      new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
-    );
-  }
-  const doctor = await User.create({
-    firstName,
-    lastName,
-    email,
-    phone,
-    nic,
-    dob,
-    gender,
-    password,
-    role: "Doctor",
-    doctorDepartment,
-    docAvatar: {
-      public_id: cloudinaryResponse.public_id,
-      url: cloudinaryResponse.secure_url,
-    },
-  });
-  res.status(200).json({
-    success: true,
-    message: "New Doctor Registered",
-    doctor,
-  });
-});
+
 
 export const getAllDoctors = catchAsyncErrors(async (req, res, next) => {
   const doctors = await User.find({ role: "Doctor" });
@@ -220,4 +147,38 @@ export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
       success: true,
       message: "Patient Logged Out Successfully.",
     });
+});
+export const addNewDoctor = catchAsyncErrors(async(req, res, next) => {
+    //We are adding a Docavatar and here we used condition that docavatar is required
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return next(new ErrorHandler("Doctor Avatar Required", 400));
+    }
+    //we have written that we required the files to get as a input by req.file
+    const { docAvatar } = req.files;
+    //the required format to paste the docAvatar and if not then throw the error
+    const allowedFormats = ["image/png", "image/jpeg","image/webp"];
+    if(!allowedFormats.includes(docAvatar.mimetype)) {
+        return next(new ErrorHandler("File Format Not Supported!", 400));
+    }
+    //ig=f the data that you are given and the email is registered already then it will throw the error
+    const { firstName, lastName, email, phone, adharno, dob, gender, password, doctorDepartment} = req.body;
+    if(!firstName || !lastName || !email || !phone || !adharno || !dob || !gender || !password || !doctorDepartment) {
+        return next(new ErrorHandler("Please Provide Full Details",400));
+        }
+        const isRegistered = await User.findOne({email});
+        if(isRegistered) {
+            return next(new ErrorHandler(`${isRegistered.role} already registered with this email`,400));
+        }
+
+        const cloudinaryResponse = await cloudinary.uploader.upload(docAvatar.tempFilePath); //we are using this to upload the the image like docavatar 
+        if(!cloudinaryResponse || cloudinaryResponse.error) {
+            console.error("Cloudinary Error!",cloudinaryResponse.error || "unknown Cloudinary Error");
+        }
+        //now we are creating a doctor user in our database by using all authentication
+        const doctor = await User.create ({firstName, lastName, email, phone, adharno, dob, gender, password, doctorDepartment, role:"Doctor", docAvatar:{public_id:cloudinaryResponse.public_id, url: cloudinaryResponse.secure_url,}});
+        res.status(200).json ({
+            success: true,
+            message:"Doctor Added Succesfully",
+            doctor
+        });
 });
