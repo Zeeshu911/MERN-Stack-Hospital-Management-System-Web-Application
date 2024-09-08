@@ -17,6 +17,8 @@ const AppointmentForm = () => {
   const [doctorLastName, setDoctorLastName] = useState("");
   const [address, setAddress] = useState("");
   const [hasVisited, setHasVisited] = useState(false);
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState("");
 
   const departmentsArray = [
     "Pediatrics",
@@ -42,6 +44,20 @@ const AppointmentForm = () => {
     };
     fetchDoctors();
   }, []);
+
+   // Filter doctors by selected department
+  useEffect(() => {
+    if (department) {
+      const filtered = doctors.filter(
+        (doctor) => doctor.doctorDepartment === department
+      );
+      setFilteredDoctors(filtered);
+    } else {
+      setFilteredDoctors([]);
+    }
+  }, [department, doctors]);
+
+  
   const handleAppointment = async (e) => {
     e.preventDefault();
     try {
@@ -148,44 +164,49 @@ const AppointmentForm = () => {
             />
           </div>
           <div>
-            <select
-              value={department}
-              onChange={(e) => {
-                setDepartment(e.target.value);
-                setDoctorFirstName("");
-                setDoctorLastName("");
-              }}
-            >
-              {departmentsArray.map((depart, index) => {
-                return (
-                  <option value={depart} key={index}>
-                    {depart}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              value={`${doctorFirstName} ${doctorLastName}`}
-              onChange={(e) => {
-                const [firstName, lastName] = e.target.value.split(" ");
-                setDoctorFirstName(firstName);
-                setDoctorLastName(lastName);
-              }}
-              disabled={!department}
-            >
-              <option value="">Select Doctor</option>
-              {doctors
-                .filter((doctor) => doctor.doctorDepartment === department)
-                .map((doctor, index) => (
-                  <option
-                    value={`${doctor.firstName} ${doctor.lastName}`}
-                    key={index}
-                  >
-                    {doctor.firstName} {doctor.lastName}
-                  </option>
-                ))}
-            </select>
-          </div>
+            
+          <select
+            value={department}
+            onChange={(e) => {
+              SetDepartment(e.target.value);
+              // setDoctorFirstName(e.target.value);
+              // setDoctorLastName(e.target.value);
+            }}
+          >
+            {departmentsArray.map((dept, index) => (
+              <option key={index} value={dept}>
+                {dept}
+              </option>
+            ))}
+          </select>
+          {/* <label>Select Doctor</label> */}
+
+          <select
+            value={selectedDoctor}
+            onChange={(e) => {
+              const selectedValue = e.target.value;
+              setSelectedDoctor(selectedValue);
+
+              // Split the selected doctor name into firstname and lastname
+              const [firstname, ...lastname] = selectedValue.split(" ");
+
+              // Set the doctor firstname and lastname
+              setDoctorFirstName(firstname);
+              setDoctorLastName(lastname.join(" ")); // Join any remaining parts for the lastname
+            }}
+            disabled={!department}
+          >
+            <option value="">Select Doctor</option>
+            {filteredDoctors.map((doctor) => (
+              <option
+                key={doctor._id}
+                value={`${doctor.firstname} ${doctor.lastname}`}
+              >
+                {doctor.firstname} {doctor.lastname}
+              </option>
+            ))}
+          </select>
+        </div>
           <textarea
             rows="10"
             value={address}
