@@ -1,43 +1,38 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React, { useContext, useEffect } from "react";
+import { useState } from "react";
 import { Context } from "../main";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { Navigate } from "react-router-dom";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
-  const { isAuthenticated } = useContext(Context);
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:4000/api/v1/user/doctors",
-          { withCredentials: true }
-        );
-        setDoctors(data.doctors);
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
-    };
-    fetchDoctors();
-  }, []);
 
-  if (!isAuthenticated) {
-    return <Navigate to={"/login"} />;
-  }
+  useEffect(() => {
+    // Fetch the data from the API
+    axios.get("http://localhost:4000/api/v1/user/doctors")
+      .then((response) => {
+        console.log("API Response: ", response.data);
+        setDoctors(response.data.doctor); // Assuming the array is in `response.data.doctor`
+      })
+      .catch((error) => {
+        console.error("Error fetching doctors: ", error);
+      });
+  }, []); // Empty dependency array to run only once on component mount
+
   return (
     <section className="page doctors">
       <h1>DOCTORS</h1>
       <div className="banner">
         {doctors && doctors.length > 0 ? (
-          doctors.map((element) => {
+          doctors.map((element, index) => {
             return (
-              <div className="card">
+              <div className="card" key={index}>
                 <img
-                  src={element.docAvatar && element.docAvatar.url}
-                  alt="doctor avatar"
+                  src={element.docAvatar?.url}
+                  alt={`${element.firstname} ${element.lastname}'s avatar`}
                 />
-                <h4>{`${element.firstName} ${element.lastName}`}</h4>
+                <h4>{`${element.firstname} ${element.lastname}`}</h4>
                 <div className="details">
                   <p>
                     Email: <span>{element.email}</span>
@@ -68,5 +63,4 @@ const Doctors = () => {
     </section>
   );
 };
-
 export default Doctors;
