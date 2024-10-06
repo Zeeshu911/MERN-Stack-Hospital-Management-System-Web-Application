@@ -82,7 +82,8 @@ const Departments = () => {
             return (
               <div key={index} className="card">
                 <div className="depart-name">{depart.name}</div>
-                <img src={depart.imageUrl} alt="Department" />
+
+                <img src={depart.imageUrl} style={{ objectFit: 'cover' }} />
               </div>
             );
           })}
