@@ -11,26 +11,12 @@ const Biography = ({imageUrl}) => {
           <p>Biography</p>
           <h3>Who We Are</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            blanditiis sequi aperiam. Debitis fugiat harum ex maxime illo
-            consequatur mollitia voluptatem omnis nihil nesciunt beatae esse
-            ipsam, sapiente totam aspernatur porro ducimus aperiam nisi. Ex
-            magnam voluptatum consectetur reprehenderit fugiat recusandae aut
-            similique illum natus velit, praesentium nostrum nesciunt. Deleniti,
-            nesciunt laboriosam totam iusto!
+          At iPhysioPerth, we are dedicated to helping you move better, feel stronger, and live pain-free. As a leading physiotherapy and rehabilitation center, our mission is to provide expert care tailored to your individual needs. With a team of highly skilled professionals, we combine evidence-based treatments with a personalized approach to ensure the best outcomes for our patients.
+
+Whether you're recovering from an injury, managing a chronic condition, or looking to enhance your physical performance, iPhysioPerth is here to support you every step of the way. Our state-of-the-art facility is equipped with advanced techniques and modern technology to deliver high-quality care in a welcoming and supportive environment.
+
+Your health and well-being are our top priorities. At iPhysioPerth, we believe in empowering our patients with the knowledge and guidance they need to take control of their recovery and achieve their wellness goals.
           </p>
-          <p>We are all in 2024!</p>
-          <p>We are working on a MERN STACK PROJECT.</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-            assumenda exercitationem accusamus sit repellendus quo optio dolorum
-            corporis corrupti. Quas similique vel minima veniam tenetur
-            obcaecati atque magni suscipit laboriosam! Veniam vitae minus nihil
-            cupiditate natus provident. Ex illum quasi pariatur odit nisi
-            voluptas illo qui ipsum mollitia. Libero, assumenda?
-          </p>
-          <p>Lorem ipsum dolor sit amet!</p>
-          <p>Coding is fun!</p>
         </div>
       </div>
     </>

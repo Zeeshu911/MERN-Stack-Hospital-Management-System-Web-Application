@@ -58,8 +58,9 @@ const Register = () => {
         <h2>Sign Up</h2>
         <p>Please Sign Up To Continue</p>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat culpa
-          voluptas expedita itaque ex, totam ad quod error?
+        At iPhysioPerth, we're committed to supporting your journey toward better health and recovery. Log in to access your personalized treatment plans, appointment details, and expert resources designed to help you stay on track.
+
+Need assistance? Our team is here to help—reach out anytime!
         </p>
         <form onSubmit={handleRegistration}>
           <div>

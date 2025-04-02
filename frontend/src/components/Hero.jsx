@@ -7,12 +7,7 @@ const Hero = ({ title, imageUrl }) => {
         <div className="banner">
           <h1>{title}</h1>
           <p>
-            ZeeCare Medical Institute is a state-of-the-art facility dedicated
-            to providing comprehensive healthcare services with compassion and
-            expertise. Our team of skilled professionals is committed to
-            delivering personalized care tailored to each patient's needs. At
-            ZeeCare, we prioritize your well-being, ensuring a harmonious
-            journey towards optimal health and wellness.
+            iPhysioPerth is a cutting-edge healthcare center specializing in holistic physiotherapy and rehabilitation services. Our team of experienced professionals is dedicated to providing personalized treatment plans that cater to each individual's unique needs. At iPhysioPerth, we focus on restoring mobility, enhancing recovery, and promoting overall well-being through expert care and innovative techniques.
           </p>
         </div>
         <div className="banner">

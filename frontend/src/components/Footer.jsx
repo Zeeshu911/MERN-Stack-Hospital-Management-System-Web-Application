@@ -72,11 +72,11 @@ const Footer = () => {
             </div>
             <div>
               <MdEmail />
-              <span>zeelab@gmail.com</span>
+              <span>ayanti@gmail.com</span>
             </div>
             <div>
               <FaLocationArrow />
-              <span>Karachi, Pakistan</span>
+              <span>Kanpur,India</span>
             </div>
           </div>
         </div>
