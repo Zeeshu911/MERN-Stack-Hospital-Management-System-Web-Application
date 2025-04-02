@@ -1,0 +1,120 @@
+/* Hospital Queue Section */
+.hospital-queue-container {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    background-color: #E3F2FD;
+    border-radius: 8px;
+}
+
+.hospital-queue-container h1 {
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.form-container input, 
+.form-container button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container button {
+    background-color: #2ecc71;
+    margin-bottom: 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.form-container button:hover {
+    background-color: #27ae60;
+}
+
+/* Table Styling */
+.queue-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+.queue-table th, .queue-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.queue-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Button inside table */
+.check-in-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.check-in-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hospital-queue-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    .queue-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .form-container input, 
+    .form-container button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hospital-queue-container h1 {
+        font-size: 20px;
+    }
+
+    .queue-table th, .queue-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .form-container button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

@@ -7,7 +7,8 @@
   font-family: "Montserrat", sans-serif;
 }
 body {
-  background: #e5e5e5;
+  background-color: #E3F2FD; /* Light Blue - Soothing and professional */
+  color: #333;
 }
 .btn {
   padding: 7px 20px;
@@ -21,7 +22,7 @@ body {
   color: #111;
 }
 .purple-btn {
-  background: #9083d5;
+  background: #a59dce;
   color: #fff;
 }
 p,
@@ -92,7 +93,7 @@ h6 {
   font-size: 40px;
 }
 .hero .banner p {
-  color: #111;
+  color: #171918;
   letter-spacing: 2px;
 }
 .hero .banner span {
