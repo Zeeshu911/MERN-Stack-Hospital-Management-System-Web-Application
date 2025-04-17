@@ -1,5 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import AddNewDoctor from "./components/AddNewDoctor";
@@ -21,7 +26,7 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/user/admin/me",
+          "http://localhost:5000/api/v1/user/admin/me",
           {
             withCredentials: true,
           }

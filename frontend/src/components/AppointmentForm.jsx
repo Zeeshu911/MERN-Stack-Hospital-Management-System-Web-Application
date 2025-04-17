@@ -34,7 +34,7 @@ const AppointmentForm = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       const { data } = await axios.get(
-        "http://localhost:4000/api/v1/user/doctors",
+        "http://localhost:5000/api/v1/user/doctors",
         { withCredentials: true }
       );
       setDoctors(data.doctors);
@@ -47,7 +47,7 @@ const AppointmentForm = () => {
     try {
       const hasVisitedBool = Boolean(hasVisited);
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/appointment/post",
+        "http://localhost:5000/api/v1/appointment/post",
         {
           firstName,
           lastName,
@@ -164,7 +164,7 @@ const AppointmentForm = () => {
                 );
               })}
             </select>
-            <select
+            {/* <select
               value={`${doctorFirstName} ${doctorLastName}`}
               onChange={(e) => {
                 const [firstName, lastName] = e.target.value.split(" ");
@@ -180,6 +180,33 @@ const AppointmentForm = () => {
                   <option
                     value={`${doctor.firstName} ${doctor.lastName}`}
                     key={index}
+                  >
+                    {doctor.firstName} {doctor.lastName}
+                  </option>
+                ))}
+            </select> */}
+            <select
+              value={JSON.stringify({
+                firstName: doctorFirstName,
+                lastName: doctorLastName,
+              })}
+              onChange={(e) => {
+                const { firstName, lastName } = JSON.parse(e.target.value);
+                setDoctorFirstName(firstName);
+                setDoctorLastName(lastName);
+              }}
+              disabled={!department}
+            >
+              <option value="">Select Doctor</option>
+              {doctors
+                .filter((doctor) => doctor.doctorDepartment === department)
+                .map((doctor, index) => (
+                  <option
+                    key={index}
+                    value={JSON.stringify({
+                      firstName: doctor.firstName,
+                      lastName: doctor.lastName,
+                    })}
                   >
                     {doctor.firstName} {doctor.lastName}
                   </option>
